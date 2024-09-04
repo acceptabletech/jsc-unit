@@ -1,5 +1,4 @@
-# jsc-unit
-JSC-Unit
+# JSC-Unit
 
 This is a template for a shellscript to execute Javascript code
 using the built-in MacOS JavaScriptCore.framework.
