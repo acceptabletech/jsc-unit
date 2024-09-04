@@ -1,8 +1,7 @@
 #!/bin/sh
 # TAIL SKIPS SHEBANG SECTION, CAT JOINS FILE LINES, JSC EXECUTES IT, AWK PRETTIFIES ERROR MESSAGES
-tail -n +5 "$0" | /System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc -e "$(cat)" 2>&1 | awk "/Exception:/{p=1} p&&/:/{sub(/^[^@]*(@?).*\\//, \"\\❗️ \")} {print}"
+tail -n +5 "$0" | "/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc" -e "if (typeof console === 'undefined') var console = {log:print}; $(cat)" 2>&1 | awk "/Exception:/{p=1} p&&/:/{sub(/^[^@]*(@?).*\\//, \"\\❗️ \")} {print}"
 exit
-if (typeof console === 'undefined') console = {log:print};
 /*************************************************************************************************************************/
 
 const dependencies = [
@@ -13,7 +12,8 @@ const dependencies = [
 
 ;dependencies.forEach( path => load(path) )
 
-/*
+console.log(`
+
 	// JavaScriptCore commands
 
 	debug
@@ -45,4 +45,5 @@ const dependencies = [
 	reoptimizationRetryCount
 	transferArrayBuffer
 	failNextNewCodeBlock
-*/
+
+`)
