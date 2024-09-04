@@ -1,5 +1,5 @@
 #!/bin/sh # TAIL SKIPS SHEBANG SECTION, CAT JOINS FILE LINES, JSC EXECUTES IT, AWK PRETTIFIES ERROR MESSAGES
-export TERM=${TERM:-dumb}; clear; cd "$(dirname "$0")"; tail -n +3 "$0" | "/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc" -e "if (typeof console === 'undefined') var console = {log:print,error:printErr,trace:debug}; if (typeof alert === 'undefined') var alert = printErr; $(cat)" 2>&1 | awk "/Exception:/{p=1} p&&/:/{sub(/^[^@]*(@?).*\\//, \"\\❗️ \")} {print}"; exit;
+export TERM=${TERM:-dumb}; cd "$(dirname "$0")"; tail -n +3 "$0" | "/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Helpers/jsc" -e "if (typeof console === 'undefined') var console = {log:print,error:printErr,trace:debug}; if (typeof alert === 'undefined') var alert = printErr; $(cat)" 2>&1 | awk "/Exception:/{p=1} p&&/:/{sub(/^[^@]*(@?).*\\//, \"\\❗️ \")} {print}"; exit;
 /******************************************************************************/
 
 const dependencies = [
